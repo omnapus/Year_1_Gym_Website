@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership | Ironstead Gym</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .pro-form input,
+        .pro-form select,
+        .pro-form textarea {
+            color: #ffffff !important;
+        }
+
+        .pro-form input::placeholder,
+        .pro-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        .pro-form select option {
+            color: #111111;
+            background-color: #222222;
+        }
+
+        .pricing-card.featured {
+            overflow: visible !important;
+            position: relative;
+        }
+
+        .pricing-card.featured .badge {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        #thankYouModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            border: 1px solid #c8a96e;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            z-index: 9999;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">IRONSTEAD</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="classes.html">Classes</a></li>
+            <li><a href="trainers.html">Trainers</a></li>
+            <li><a href="contact.html" class="btn" style="padding: 10px 20px;">Join Now</a></li>
+        </ul>
+    </nav>
+
+    <header class="membership-hero">
+        <h2 class="section-title">CHOOSE YOUR <span>RANK</span></h2>
+        <p style="text-align:center; max-width: 600px; margin: -30px auto 40px auto; opacity: 0.8;">
+            Commit to your greatness. Select a plan that fits your goals and join the elite.
+        </p>
+    </header>
+
+    <section class="container">
+        <div class="grid">
+            <div class="card pricing-card">
+                <div class="plan-name">BASIC</div>
+                <div class="price">$39<span>/mo</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> 24/7 Gym Access</li>
+                    <li><i class="fas fa-check"></i> Standard Locker Room</li>
+                    <li><i class="fas fa-check"></i> Free High-Speed Wi-Fi</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Group Classes</li>
+                </ul>
+                <a href="#join-form" class="btn-outline" onclick="selectPlan('Basic Membership')">Select Plan</a>
+            </div>
+
+            <div class="card pricing-card featured">
+                <div class="badge">MOST POPULAR</div>
+                <div class="plan-name">ELITE</div>
+                <div class="price">$69<span>/mo</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> Everything in Basic</li>
+                    <li><i class="fas fa-check"></i> Unlimited Classes</li>
+                    <li><i class="fas fa-check"></i> Sauna & Steam Room</li>
+                    <li><i class="fas fa-check"></i> 1 Guest Pass / Month</li>
+                </ul>
+                <a href="#join-form" class="btn" onclick="selectPlan('Elite Membership')">Select Plan</a>
+            </div>
+
+            <div class="card pricing-card">
+                <div class="plan-name">IRON-PRO</div>
+                <div class="price">$129<span>/mo</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> Everything in Elite</li>
+                    <li><i class="fas fa-check"></i> Personal Training (2/mo)</li>
+                    <li><i class="fas fa-check"></i> Recovery Lounge Access</li>
+                    <li><i class="fas fa-check"></i> Free Supplement Bar</li>
+                </ul>
+                <a href="#join-form" class="btn-outline" onclick="selectPlan('Iron-Pro Membership')">Select Plan</a>
+            </div>
+        </div>
+
+        <div id="join-form" class="form-container">
+            <h2 class="section-title" style="font-size: 2.5rem; margin-top: 50px;">GET IN <span>TOUCH</span></h2>
+            <form class="pro-form">
+                <div style="display: flex; gap: 20px;">
+                    <input type="text" placeholder="First Name" required>
+                    <input type="text" placeholder="Last Name" required>
+                </div>
+                <input type="email" placeholder="Email Address" required>
+                <select>
+                    <option value="" disabled selected>Interested in...</option>
+                    <option>Basic Membership</option>
+                    <option>Elite Membership</option>
+                    <option>Iron-Pro Membership</option>
+                    <option>Personal Training Only</option>
+                </select>
+                <textarea rows="4" placeholder="Any medical conditions or specific goals?"></textarea>
+                <button type="submit" class="btn" style="width: 100%;">SEND MY APPLICATION</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>&copy; 2026 Ironstead Gym | Forged in Strength</footer>
+
+    <div id="thankYouModal">
+        <h3>Thank You for Your Application!</h3>
+        <p>We have received your application and will be in touch shortly with details on secure payment to activate your membership.</p>
+        <br>
+        <button class="btn" onclick="document.getElementById('thankYouModal').style.display = 'none'">Close</button>
+    </div>
+
+    <script>
+        function selectPlan(planName) {
+            const select = document.querySelector('.pro-form select');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].text === planName) {
+                    select.selectedIndex = i;
+                }
+            }
+        }
+
+        document.querySelector('.pro-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('thankYouModal').style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
